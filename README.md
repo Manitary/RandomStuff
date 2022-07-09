@@ -34,4 +34,4 @@ Currently supported links:
 * gfycat.com link
 * youtube.com or youtu.be link (requires youtube-dl)
 * v.redd.it link (requires youtube-dl)
-* streamable.com link (requiers youtube-dl)
+* streamable.com link (requires youtube-dl)

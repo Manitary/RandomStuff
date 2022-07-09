@@ -88,7 +88,7 @@ def CreateFile(code):
         - gfycat.com link
         - youtube.com or youtu.be link (requires youtube-dl)
         - v.redd.it link (requires youtube-dl)
-        - streamable.com (requiers youtube-dl)
+        - streamable.com (requires youtube-dl)
         '''
         thread = reddit.submission(id = code)
 
