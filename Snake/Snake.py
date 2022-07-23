@@ -28,11 +28,11 @@ def adjust(coords):
     if coords[0] == BOARDWIDTH:
         coords[0] = 0
     if coords[0] == -1:
-        coords[0] = BOARDWIDTH
+        coords[0] = BOARDWIDTH - 1
     if coords[1] == BOARDHEIGHT:
         coords[1] = 0
     if coords[1] == -1:
-        coords[1] = BOARDHEIGHT
+        coords[1] = BOARDHEIGHT - 1
     return coords
 
 draw_coord = lambda coords: pygame.Rect(CELLSIZE * coords[0], OFFSET + CELLSIZE * coords[1], CELLSIZE, CELLSIZE) 
@@ -85,13 +85,13 @@ while True:
             pygame.quit()
             sys.exit()
         if event.type == KEYDOWN and not gameOver:
-            if event.key == K_LEFT:
+            if event.key == K_LEFT or event.key == K_a:
                 newDirection = LEFT if playerDirection != RIGHT else playerDirection
-            if event.key == K_RIGHT:
+            if event.key == K_RIGHT or event.key == K_d:
                 newDirection = RIGHT if playerDirection != LEFT else playerDirection
-            if event.key == K_UP:
+            if event.key == K_UP or event.key == K_w:
                 newDirection = UP if playerDirection != DOWN else playerDirection
-            if event.key == K_DOWN:
+            if event.key == K_DOWN or event.key == K_s:
                 newDirection = DOWN if playerDirection != UP else playerDirection
         if event.type == KEYUP:
             if event.key == K_r:
