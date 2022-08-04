@@ -285,7 +285,7 @@ class Game:
     def toggleReset(self):
         self.newGame()
 
-    def toggleGhotPiece(self):
+    def toggleGhostPiece(self):
         global TOGGLE_GHOST
         TOGGLE_GHOST = not TOGGLE_GHOST
         if not TOGGLE_GHOST:
@@ -419,7 +419,7 @@ class Game:
                     if event.key == K_r:
                         self.toggleReset()
                     if event.key == K_g:
-                        self.toggleGhotPiece()
+                        self.toggleGhostPiece()
                     if event.key == K_m:
                         self.toggleBGMusic()
                     if event.key == K_ESCAPE or event.key == K_q:
