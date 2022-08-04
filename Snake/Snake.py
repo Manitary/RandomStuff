@@ -8,8 +8,7 @@ CELLSIZE = 20
 BOARDWIDTH = 20
 BOARDHEIGHT = 20
 OFFSET = 50
-#Must be < BOARDWIDTH // 2
-STARTLENGTH = 6
+STARTLENGTH = 6 #Must be < BOARDWIDTH // 2
 SPEEDUPLEVEL = 5
 BONUSSPEED = 1
 
@@ -126,7 +125,6 @@ while True:
 
         pygame.draw.rect(windowSurface, YELLOW, topDelimiter)
         pygame.draw.rect(windowSurface, YELLOW, topDelimiterInner)
-        
         scoreText, scoreRect = scoreDraw(foodCount)
         windowSurface.blit(scoreText, scoreRect)
 
