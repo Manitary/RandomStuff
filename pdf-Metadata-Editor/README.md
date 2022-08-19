@@ -9,5 +9,4 @@ Files to edit can be selected through the menu, or by draggin and dropping onto 
 ## Known issues
 
 * The window does not shrink in height automatically when a new PDF with fewer metadata entries is opened.
-* Opening multiple PDF files within the same session generates lots of warnings in the console. The program still functions correctly nonetheless.
 * Catching some known errors could be addressed more appropriately (e.g. attempting to open a password-protected PDF, attempting to edit a file when the corresponding ``_backup`` already exists)
