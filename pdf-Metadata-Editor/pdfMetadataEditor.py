@@ -34,8 +34,9 @@ class MainWindow(QMainWindow):
     def dropEvent(self, event):
         for url in event.mimeData().urls():
             self.file_name = str(url.toLocalFile())
-            if self.file_name:
+            if self.file_name.endswith('.pdf'):
                 self.openFile()
+                break
 
     def createActions(self):
         self.quit_act = QAction("Quit")
@@ -59,8 +60,35 @@ class MainWindow(QMainWindow):
             self.path = os.path.dirname(self.file_name)
             self.file_reader = PdfReader(self.file_name)
             self.meta = self.file_reader.metadata
+            '''
             for i in reversed(range(self.form.count())):
                 self.form.removeRow(i)
+            '''
+            '''
+            removeRow() gives error messages when deleting some rows (maybe those with a layout?)
+            So we try all possible ways of catching widgets to deleteLater(), then removeRow()
+            item -> spanning -> Widget
+                             -> HBoxLayout -> Widgets
+                 -> else -> Label -> Widget
+                         -> Field -> Widget
+                                  -> HboxLayout -> Widgets
+            '''
+            for _ in range(self.form.rowCount()):
+                if self.form.itemAt(0, QFormLayout.ItemRole.SpanningRole):
+                    if self.form.itemAt(0, QFormLayout.ItemRole.SpanningRole).widget():
+                        self.form.itemAt(0).widget().deleteLater()
+                    else:
+                        for j in range(self.form.itemAt(0, QFormLayout.ItemRole.SpanningRole).count()):
+                            self.form.itemAt(0, QFormLayout.ItemRole.SpanningRole).itemAt(j).widget().deleteLater()
+                else:
+                    if self.form.itemAt(0, QFormLayout.ItemRole.LabelRole).widget():
+                        self.form.itemAt(0, QFormLayout.ItemRole.LabelRole).widget().deleteLater()
+                    if self.form.itemAt(0, QFormLayout.ItemRole.FieldRole).widget():
+                        self.form.itemAt(0, QFormLayout.ItemRole.FieldRole).widget().deleteLater()
+                    else:
+                        for j in range(self.form.itemAt(0, QFormLayout.ItemRole.FieldRole).count()):
+                            self.form.itemAt(0, QFormLayout.ItemRole.FieldRole).itemAt(j).widget().deleteLater()
+                self.form.removeRow(0)
             self.setUpMainWindow()
         except Exception as e:
             QMessageBox.critical(self, "Error", f"An exception of type {type(e).__name__} occurred.<p>Arguments:\n{e.args!r}", QMessageBox.StandardButton.Ok)
